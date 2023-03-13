@@ -2,18 +2,15 @@
 
 ## 📗 Table of Contents
 
-- [💎 Awesome Project](#-awesome-project)
+- [📚 OOP School Library](#-oop-school-library)
   - [🛠 Built With](#-built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#-live-demo)
   - [💻 Getting Started](#-getting-started)
     - [Prerequisites](#prerequisites)
     - [Setup](#setup)
     - [Installation](#installation)
     - [Usage](#usage)
-    - [Run tests](#run-tests)
-    - [Deployment](#deployment)
   - [👥 Authors](#-authors)
   - [🔭 Future Features](#-future-features)
   - [🤝 Contributing](#-contributing)
@@ -22,63 +19,27 @@
   - [📜 License](#-license)
 
 
-# 💎 Awesome Project
+# 📚 OOP School Library
 
-> Describe your project in 1 or 2 sentences.
-
-This is a template for **Ruby** projects.
+A simple console app that allows users to create student and teacher objects, add new books to the library and keep track of borrowing records.
 
 ## 🛠 Built With
 
 ### Tech Stack
 
-> Describe the tech stack and include only the relevant sections that apply to your project.
-
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-  </ul>
-</details>
-
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-  </ul>
-</details>
-
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-  </ul>
-</details>
+- Ruby
 
 
 ### Key Features
 
-> Describe between 1-3 key features of the application.
-
-- **[key_feature_1]**
-- **[key_feature_2]**
-- **[key_feature_3]**
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-## 🚀 Live Demo
-
-> Add a link to your deployed project.
-
-- [Live Demo Link](https://google.com)
+- Add new students or teachers
+- Add new books
+- Save borrowing records
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## 💻 Getting Started
-
-> Describe how a new developer could make use of your project.
 
 To get a local copy up and running, follow these steps.
 
@@ -86,13 +47,6 @@ To get a local copy up and running, follow these steps.
 
 In order to run this project you need [Ruby](https://www.ruby-lang.org/en/) installed on your machine.
 
-<!--
-Example command:
-
-```sh
- gem install rails
-```
- -->
 
 ### Setup
 
@@ -100,7 +54,7 @@ Clone this repository to your desired folder:
 
 ```sh
   cd my-project
-  git clone git@github.com:IndieCoderMM/awesome-project.git .
+  git clone git@github.com:IndieCoderMM/oop-school-library.git .
 ```
 
 ### Installation
@@ -115,44 +69,15 @@ Install this project with:
 
 To run the project, execute the following command:
 
-<!--
-Example command:
 
 ```sh
-  rails server
+  ruby main.rb
 ```
---->
-
-### Run tests
-
-To run tests, run the following command:
-
-<!--
-Example command:
-
-```sh
-  bin/rails test test/models/article_test.rb
-```
---->
-
-### Deployment
-
-You can deploy this project using:
-
-<!--
-Example:
-
-```sh
-
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 ## 👥 Authors
-
-> Mention all of the collaborators of this project.
 
 👨‍🚀 **Hein Thant**
 
@@ -160,22 +85,13 @@ Example:
 - LinkedIn: [LinkedIn](https://linkedin.com/in/hthantoo)
 - Gmail: hthant00chk@gmail.com
 
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## 🔭 Future Features 
 
-> Describe 1 - 3 features you will add to the project.
-
-- [ ] **[new_feature_1]**
-- [ ] **[new_feature_2]**
-- [ ] **[new_feature_3]**
+- [ ] Add basic UI
+- [ ] Preserve data
+- [ ] Unit tests
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
