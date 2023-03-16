@@ -19,6 +19,6 @@ class Student < Person
   end
 
   def to_s 
-    "[#{self.class}] ##{@id} #{name} (Age: #{@age}) <classroom: #{@classroom.label}>"
+    "<#{self.class}> #{name} [ID: ##{@id} | Age: #{@age} | Class: #{@classroom.label}]"
   end
 end
