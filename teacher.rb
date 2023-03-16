@@ -9,4 +9,8 @@ class Teacher < Person
   def can_use_services?
     true
   end
+
+  def to_s
+    "<#{self.class}> #{@name} [ID: ##{@id} | Age: #{@age} | Subject: #{@specialization}]"
+  end
 end

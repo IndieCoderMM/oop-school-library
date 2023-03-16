@@ -1,33 +1,42 @@
-require_relative './person'
-require_relative './capitalize_decorator'
-require_relative './trimmer_decorator'
-require_relative './classroom'
-require_relative './student'
-require_relative './book'
-require_relative './rental'
+require_relative './app'
 
-# Checking decorators
-person = Person.new(22, 'maximilianus')
-capitalized_person = CapitalizeDecorator.new(person)
-capitalized_trimmed_person = TrimmerDecorator.new(capitalized_person)
-puts person.correct_name
-puts capitalized_person.correct_name
-puts capitalized_trimmed_person.correct_name
+def run_command(app, cmd)
+  case cmd
+  when 1
+    app.list_books
+  when 2
+    app.list_people
+  when 3
+    app.create_person
+  when 4
+    app.create_book
+  when 5
+    app.create_rental
+  when 6
+    app.list_rental_for_person
+  end
+end
 
-# Checking associations
+def main
+  app = App.new
+  puts '+-----------------------+'
+  puts '| 📚 OOP School Library |'
+  puts '+-----------------------+'
 
-math_class = Classroom.new('Math')
-peter = Student.new(22, 'Peter', classroom: math_class)
-puts "#{math_class.label} students: #{math_class.students.map(&:name)}"
+  loop do
+    puts 'Available Commands'
+    puts '- [1] List all books', '- [2] List all people', '- [3] Add new person', '- [4] Add new book',
+         '- [5] Make a rental', '- [6] List rentals for a person', '- [x] Close the app'
 
-history_class = Classroom.new('History')
-history_class.add_student(peter)
-puts "#{peter.name} is studying: #{peter.classroom.label}"
+    cmd = app.get_input('Enter your command', options: [1, 2, 3, 4, 5, 6, 'x'])
+    break if cmd == 'x'
 
-book1 = Book.new('Habits', 'James')
-person.add_rental(Rental.new('3-3-23', book1, person))
-puts "#{book1.title}'s rentals: #{book1.rentals.map(&:person).map(&:name)}"
+    puts
+    run_command(app, cmd)
+    puts
+  end
+  rating = app.get_input('Please give this app a rating: ⭐', min_length: 0).to_i
+  puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
+end
 
-book2 = Book.new('Work', 'Cal')
-book2.add_rental(Rental.new('12-3-23', book2, peter))
-puts "#{peter.name}'s rentals: #{peter.rentals.map(&:book).map(&:title)}"
+main
