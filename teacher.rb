@@ -10,7 +10,7 @@ class Teacher < Person
     true
   end
 
-  def to_s 
+  def to_s
     "<#{self.class}> #{@name} [ID: ##{@id} | Age: #{@age} | Subject: #{@specialization}]"
   end
 end

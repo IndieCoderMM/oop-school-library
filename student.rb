@@ -18,7 +18,7 @@ class Student < Person
     '¯\(ツ)/¯'
   end
 
-  def to_s 
+  def to_s
     "<#{self.class}> #{name} [ID: ##{@id} | Age: #{@age} | Class: #{@classroom.label}]"
   end
 end
