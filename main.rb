@@ -26,7 +26,7 @@ def main
   loop do
     puts 'Available Commands'
     puts '- [1] List all books', '- [2] List all people', '- [3] Add new person', '- [4] Add new book',
-         '- [5] Make a rental', "- [6] List rentals for person's [id]", '- [x] Close the app'
+         '- [5] Make a rental', '- [6] List rentals for a person', '- [x] Close the app'
 
     cmd = app.get_input('Enter your command', options: [1, 2, 3, 4, 5, 6, 'x'])
     break if cmd == 'x'
@@ -35,8 +35,8 @@ def main
     run_command(app, cmd)
     puts
   end
-  rating = app.get_input('Please give us a rating: ⭐', min_length: 0).to_i
-  puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app'
+  rating = app.get_input('Please give this app a rating: ⭐', min_length: 0).to_i
+  puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
 end
 
 main

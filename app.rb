@@ -9,7 +9,7 @@ class App
     @books = []
     @people = []
     @classrooms = {}
-    init_classrooms
+    init_classrooms(%w[maths english history])
   end
 
   def list_books
@@ -32,8 +32,8 @@ class App
 
   def create_person
     puts '# Creating New Person'
-    role = get_input("Select person's role ::[1]Student; [2]Teacher::", options: [1, 2])
-    role = role == 1 ? 'student' : 'teacher'
+    role = get_input("Select person's role ::[S]tudent; [T]eacher::", options: %w[s t S T])
+    role = role.downcase == 's' ? 'student' : 'teacher'
     name = get_input('Enter Name')
     age = get_input('Enter age', type: 'num')
     case role
@@ -50,7 +50,7 @@ class App
     author = get_input('Enter author')
     book = Book.new(title, author)
     @books.push(book)
-    puts '[k] New book created successfully!', book.to_s
+    puts '[$] New book created successfully!', book.to_s
   end
 
   def create_rental
@@ -69,7 +69,7 @@ class App
     people_index = get_input('Select a person by number', options: (1..@people.length).to_a) - 1
     date = get_input('Enter date', type: 'date')
     rental = Rental.new(date, @books[book_index], @people[people_index])
-    puts '[k] Rental created successfully!'
+    puts '[$] Rental created successfully!'
     puts "#{rental.date} Book: #{rental.book.title}, Borrower: #{rental.person.name}"
   end
 
@@ -105,7 +105,7 @@ class App
         input = input.to_i.zero? ? input : input.to_i
       end
       if !options.empty? && !options.include?(input)
-        puts '[!] Invalid Input'
+        puts '[!] Invalid Input', "\t::options::#{options}"
         next
       end
 
@@ -117,33 +117,33 @@ class App
   private
 
   def create_student(name, age)
-    choice = get_input('Choose classroom ::[M]ath; [C]omputer; [H]istory::', options: %w[m c h])
-    classroom = case choice
-                when 'm'
-                  @classrooms[:math]
-                when 'c'
-                  @classrooms[:computer]
-                when 'h'
-                  @classrooms[:history]
-                end
-    permission = get_input('Has parent permission [y/n]?', min_length: 0)
+    classrooms_a = []
+    classrooms_s = ''
+    @classrooms.each_key { |k| classrooms_a.push(k, k.upcase) }
+    @classrooms.each_value do |c|
+      str = "[#{c.label[0].upcase}]#{c.label[1..]}; "
+      classrooms_s += str
+    end
+    choice = get_input("Choose classroom ::#{classrooms_s[0...-2]}::", options: classrooms_a)
+    classroom = @classrooms[choice.downcase]
+    permission = get_input('Has parent permission [Y/n]?', min_length: 0)
+    permission = permission.empty? ? 'y' : permission.to_s.downcase
     student = Student.new(age, name, classroom: classroom, parent_permission: permission == 'y')
     @people.push(student)
-    puts '[k] New student created successfully!', student.to_s
+    puts '[$] New student created successfully!', student.to_s
   end
 
   def create_teacher(name, age)
     specialization = get_input('Enter specialization')
     teacher = Teacher.new(age, name, specialization: specialization)
     @people.push(teacher)
-    puts '[k] New teacher created successfully!', teacher.to_s
+    puts '[$] New teacher created successfully!', teacher.to_s
   end
 
-  def init_classrooms
-    math = Classroom.new('Math')
-    computer = Classroom.new('Computer')
-    history = Classroom.new('History')
-    @classrooms = { math: math, computer: computer, history: history }
+  def init_classrooms(classes)
+    classes.each do |classname|
+      @classrooms[classname[0]] = Classroom.new(classname.capitalize)
+    end
   end
 
   def valid?(input, min_length, type)
@@ -154,6 +154,13 @@ class App
     if type == 'num' && input.to_i <= 0
       puts '[!] Please enter a valid number'
       return false
+    end
+    if type == 'date'
+      date_format = /\d{4}-\d{1,2}-\d{1,2}/
+      unless input.match(date_format)
+        puts '[!] Date must be in %Y-%m-%d format'
+        return false
+      end
     end
     true
   end
