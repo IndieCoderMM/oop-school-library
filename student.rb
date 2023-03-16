@@ -17,4 +17,8 @@ class Student < Person
   def play_hooky
     '¯\(ツ)/¯'
   end
+
+  def to_s 
+    "[#{self.class}] ##{@id} #{name} (Age: #{@age}) <classroom: #{@classroom.label}>"
+  end
 end
