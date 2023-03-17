@@ -1,4 +1,6 @@
+require 'pry'
 require_relative './app'
+
 
 def run_command(app, cmd)
   case cmd

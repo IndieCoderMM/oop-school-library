@@ -1,3 +1,4 @@
+require 'pry'
 require_relative './book'
 require_relative './student'
 require_relative './teacher'
@@ -49,7 +50,7 @@ class App
     title = get_input('Enter title')
     author = get_input('Enter author')
     book = Book.new(title, author)
-    @books.push(book)
+    @books.push(author)
     puts '[$] New book created successfully!', book.to_s
   end
 
