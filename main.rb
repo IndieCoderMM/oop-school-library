@@ -9,7 +9,7 @@ end
 
 def main
   app = App.new
-  
+
   puts '+-----------------------+'
   puts '| 📚 OOP School Library |'
   puts '+-----------------------+'
@@ -20,8 +20,8 @@ def main
     break if cmd == 'x'
 
     puts
-    run_command=RunCommand.new(app,cmd)
-    run_command.run_cmd(app,cmd)
+    run_command = RunCommand.new(app, cmd)
+    run_command.run_cmd(app, cmd)
     puts
   end
   rating = app.get_input('Please give this app a rating: ⭐', min_length: 0).to_i
