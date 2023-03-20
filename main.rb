@@ -1,5 +1,6 @@
 require_relative './app'
 require_relative './run_command'
+require_relative './input'
 
 def display_options
   puts 'Available Commands'
@@ -16,16 +17,14 @@ def main
 
   loop do
     display_options
-    cmd = app.get_input('Enter your command', options: [1, 2, 3, 4, 5, 6, 'x'])
-    break if cmd == 'x'
+    cmd = Input.get('Enter your command', options: [1, 2, 3, 4, 5, 6, 'x', 'X'])
+    break if cmd.to_s.downcase == 'x'
 
     puts
-    run_command = RunCommand.new(app, cmd)
-    run_command.run_cmd(app, cmd)
+    RunCommand.run(app, cmd)
     puts
   end
-  rating = app.get_input('Please give this app a rating: ⭐', min_length: 0).to_i
-  puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
+  app.close
 end
 
 main

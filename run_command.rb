@@ -1,10 +1,5 @@
 class RunCommand
-  def initialize(app, cmd)
-    @app = app
-    @cmd = cmd
-  end
-
-  def run_cmd(app, cmd)
+  def self.run(app, cmd)
     case cmd
     when 1
       app.list_books
