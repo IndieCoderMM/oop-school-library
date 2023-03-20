@@ -1,21 +1,5 @@
 require_relative './app'
-
-def run_command(app, cmd)
-  case cmd
-  when 1
-    app.list_books
-  when 2
-    app.list_people
-  when 3
-    app.create_person
-  when 4
-    app.create_book
-  when 5
-    app.create_rental
-  when 6
-    app.list_rental_for_person
-  end
-end
+require_relative './run_command'
 
 def display_options
   puts 'Available Commands'
@@ -25,6 +9,7 @@ end
 
 def main
   app = App.new
+  
   puts '+-----------------------+'
   puts '| 📚 OOP School Library |'
   puts '+-----------------------+'
@@ -35,7 +20,8 @@ def main
     break if cmd == 'x'
 
     puts
-    run_command(app, cmd)
+    run_command=RunCommand.new(app,cmd)
+    run_command.run_cmd(app,cmd)
     puts
   end
   rating = app.get_input('Please give this app a rating: ⭐', min_length: 0).to_i
