@@ -25,7 +25,7 @@ class Book
   end
 
   def to_h
-    {title: @title, author: @author}
+    { title: @title, author: @author }
   end
 
   private

@@ -25,6 +25,7 @@ class Student < Person
   def to_h
     {
       id: @id,
+      role: self.class,
       age: @age,
       name: @name,
       classroom: @classroom.label,

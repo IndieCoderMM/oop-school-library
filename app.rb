@@ -4,15 +4,20 @@ require_relative './teacher'
 require_relative './rental'
 require_relative './classroom'
 require_relative './input'
-require 'json'
+require_relative './storage'
 
 class App
+  attr_accessor :books, :people, :rentals
+  attr_reader :classrooms
+
   def initialize
     @books = []
     @people = []
     @classrooms = {}
     @rentals = []
+    @storage = Storage.new(self)
     init_classrooms(%w[maths english history])
+    @storage.load_data
   end
 
   def list_books
@@ -101,9 +106,7 @@ class App
   def close
     rating = Input.get('Please give this app a rating: ⭐', min_length: 0).to_i
     puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
-    File.write('./data/books.json', JSON.generate(@books.map(&:to_h)))
-    File.write('./data/people.json', JSON.generate(@people.map(&:to_h)))
-    File.write('./data/rentals.json', JSON.generate(@rentals.map(&:to_h)))
+    @storage.save_data
   end
 
   private

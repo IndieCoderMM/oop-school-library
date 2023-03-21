@@ -17,6 +17,7 @@ class Teacher < Person
   def to_h
     {
       id: @id,
+      role: self.class,
       age: @age,
       name: @name,
       specialization: @specialization,
