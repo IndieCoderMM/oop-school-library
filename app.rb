@@ -4,13 +4,20 @@ require_relative './teacher'
 require_relative './rental'
 require_relative './classroom'
 require_relative './input'
+require_relative './storage'
 
 class App
+  attr_accessor :books, :people, :rentals
+  attr_reader :classrooms
+
   def initialize
     @books = []
     @people = []
     @classrooms = {}
+    @rentals = []
+    @storage = Storage.new(self)
     init_classrooms(%w[maths english history])
+    @storage.load_data
   end
 
   def list_books
@@ -70,6 +77,7 @@ class App
     people_index = Input.get('Select a person by number', options: (1..@people.length).to_a) - 1
     date = Input.get('Enter date', type: 'date')
     rental = Rental.new(date, @books[book_index], @people[people_index])
+    @rentals.push(rental)
     puts '[$] Rental created successfully!'
     puts "#{rental.date} Book: #{rental.book.title}, Borrower: #{rental.person.name}"
   end
@@ -98,6 +106,7 @@ class App
   def close
     rating = Input.get('Please give this app a rating: ⭐', min_length: 0).to_i
     puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
+    @storage.save_data
   end
 
   private

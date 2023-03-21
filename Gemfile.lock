@@ -28,6 +28,7 @@ PLATFORMS
   x64-mingw-ucrt
 
 DEPENDENCIES
+  json
   rubocop (>= 1.0, < 2.0)
 
 BUNDLED WITH
