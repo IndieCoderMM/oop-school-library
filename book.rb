@@ -24,6 +24,10 @@ class Book
     "<#{self.class}> #{title_case(@title)} by #{title_case(@author)}"
   end
 
+  def to_h
+    {title: @title, author: @author}
+  end
+
   private
 
   def title_case(text)
