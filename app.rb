@@ -4,6 +4,7 @@ require_relative './teacher'
 require_relative './rental'
 require_relative './classroom'
 require_relative './input'
+require 'json'
 
 class App
   def initialize
@@ -98,6 +99,7 @@ class App
   def close
     rating = Input.get('Please give this app a rating: ⭐', min_length: 0).to_i
     puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
+    File.write('./data/books.json', JSON.generate(@books.map(&:to_h)))
   end
 
   private
