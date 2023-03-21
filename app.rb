@@ -3,6 +3,7 @@ require_relative './student'
 require_relative './teacher'
 require_relative './rental'
 require_relative './classroom'
+require_relative './input'
 
 class App
   def initialize
@@ -32,10 +33,10 @@ class App
 
   def create_person
     puts '# Creating New Person'
-    role = get_input("Select person's role ::[S]tudent; [T]eacher::", options: %w[s t S T])
+    role = Input.get("Select person's role ::[S]tudent; [T]eacher::", options: %w[s t S T])
     role = role.downcase == 's' ? 'student' : 'teacher'
-    name = get_input('Enter Name')
-    age = get_input('Enter age', type: 'num')
+    name = Input.get('Enter Name')
+    age = Input.get('Enter age', type: 'num')
     case role
     when 'student'
       create_student(name, age)
@@ -46,8 +47,8 @@ class App
 
   def create_book
     puts '# Creating New Book'
-    title = get_input('Enter title')
-    author = get_input('Enter author')
+    title = Input.get('Enter title')
+    author = Input.get('Enter author')
     book = Book.new(title, author)
     @books.push(book)
     puts '[$] New book created successfully!', book.to_s
@@ -64,10 +65,10 @@ class App
 
     puts '# Creating New Rental'
     list_all(@books)
-    book_index = get_input('Select a book by number', options: (1..@books.length).to_a) - 1
+    book_index = Input.get('Select a book by number', options: (1..@books.length).to_a) - 1
     list_all(@people)
-    people_index = get_input('Select a person by number', options: (1..@people.length).to_a) - 1
-    date = get_input('Enter date', type: 'date')
+    people_index = Input.get('Select a person by number', options: (1..@people.length).to_a) - 1
+    date = Input.get('Enter date', type: 'date')
     rental = Rental.new(date, @books[book_index], @people[people_index])
     puts '[$] Rental created successfully!'
     puts "#{rental.date} Book: #{rental.book.title}, Borrower: #{rental.person.name}"
@@ -79,13 +80,14 @@ class App
       return
     end
 
-    person_id = get_input("Enter person's ID", type: 'num')
+    person_id = Input.get("Enter person's ID", type: 'num')
     person = @people.select { |p| p.id == person_id }[0]
     if person.nil?
       puts "[!] Person with ID:#{person_id} not found"
       return
     elsif person.rentals.empty?
       puts "[i] #{person.name} has no rentals"
+      return
     end
     puts "# List of Rentals for #{person.name}"
     person.rentals.each do |rental|
@@ -93,25 +95,9 @@ class App
     end
   end
 
-  def get_input(prompt, options: [], min_length: 1, type: 'str')
-    valid = false
-    input = nil
-    until valid
-      print prompt, ' >> '
-      input = gets.chomp.strip
-      next unless valid?(input, min_length, type)
-
-      unless type == 'date'
-        input = input.to_i.zero? ? input : input.to_i
-      end
-      if !options.empty? && !options.include?(input)
-        puts '[!] Invalid Input', "\t::options::#{options}"
-        next
-      end
-
-      valid = true
-    end
-    input
+  def close
+    rating = Input.get('Please give this app a rating: ⭐', min_length: 0).to_i
+    puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
   end
 
   private
@@ -124,9 +110,9 @@ class App
       str = "[#{c.label[0].upcase}]#{c.label[1..]}; "
       classrooms_s += str
     end
-    choice = get_input("Choose classroom ::#{classrooms_s[0...-2]}::", options: classrooms_a)
+    choice = Input.get("Choose classroom ::#{classrooms_s[0...-2]}::", options: classrooms_a)
     classroom = @classrooms[choice.downcase]
-    permission = get_input('Has parent permission [Y/n]?', min_length: 0)
+    permission = Input.get('Has parent permission [Y/n]?', min_length: 0)
     permission = permission.empty? ? 'y' : permission.to_s.downcase
     student = Student.new(age, name, classroom: classroom, parent_permission: permission == 'y')
     @people.push(student)
@@ -134,7 +120,7 @@ class App
   end
 
   def create_teacher(name, age)
-    specialization = get_input('Enter specialization')
+    specialization = Input.get('Enter specialization')
     teacher = Teacher.new(age, name, specialization: specialization)
     @people.push(teacher)
     puts '[$] New teacher created successfully!', teacher.to_s
@@ -144,25 +130,6 @@ class App
     classes.each do |classname|
       @classrooms[classname[0]] = Classroom.new(classname.capitalize)
     end
-  end
-
-  def valid?(input, min_length, type)
-    if input.length < min_length
-      puts '[!] Please enter a value'
-      return false
-    end
-    if type == 'num' && input.to_i <= 0
-      puts '[!] Please enter a valid number'
-      return false
-    end
-    if type == 'date'
-      date_format = /\d{4}-\d{1,2}-\d{1,2}/
-      unless input.match(date_format)
-        puts '[!] Date must be in %Y-%m-%d format'
-        return false
-      end
-    end
-    true
   end
 
   def list_all(items)

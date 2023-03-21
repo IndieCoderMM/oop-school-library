@@ -85,6 +85,17 @@ To run the project, execute the following command:
 - LinkedIn: [LinkedIn](https://linkedin.com/in/hthantoo)
 - Gmail: hthant00chk@gmail.com
 
+👨‍🚀 **Yetemegn Lemma**
+
+- GitHub: [@yetemegn-telaye](https://github.com/yetemegn-telaye)
+- Twitter: [@Yetemegn19](https://twitter.com/Yetemegn19)
+- Gmail: lemma19yet@gmail.com
+
+👨‍🚀 **Ajayi Ridwan**
+
+- GitHub: [@Ridwanullahi-code](https://github.com/Ridwanullahi-code)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/ajayi-ridwan/)
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🔭 Future Features 
