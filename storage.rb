@@ -24,6 +24,8 @@ class Storage
   private
 
   def read_data(filename)
+    return [] unless File.exist?(filename)
+
     file = File.open(filename)
     file_data = file.read
     file.close
