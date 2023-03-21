@@ -11,6 +11,7 @@ class App
     @books = []
     @people = []
     @classrooms = {}
+    @rentals = []
     init_classrooms(%w[maths english history])
   end
 
@@ -71,6 +72,7 @@ class App
     people_index = Input.get('Select a person by number', options: (1..@people.length).to_a) - 1
     date = Input.get('Enter date', type: 'date')
     rental = Rental.new(date, @books[book_index], @people[people_index])
+    @rentals.push(rental)
     puts '[$] Rental created successfully!'
     puts "#{rental.date} Book: #{rental.book.title}, Borrower: #{rental.person.name}"
   end
@@ -100,6 +102,8 @@ class App
     rating = Input.get('Please give this app a rating: ⭐', min_length: 0).to_i
     puts rating >= 4 ? "😊 Thanks for giving us #{'⭐' * rating}!" : '😃 Thanks for using our app!'
     File.write('./data/books.json', JSON.generate(@books.map(&:to_h)))
+    File.write('./data/people.json', JSON.generate(@people.map(&:to_h)))
+    File.write('./data/rentals.json', JSON.generate(@rentals.map(&:to_h)))
   end
 
   private
