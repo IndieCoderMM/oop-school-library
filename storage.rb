@@ -29,7 +29,6 @@ class Storage
     file.close
     return JSON.parse(file_data) unless file_data.empty?
 
-
     []
   end
 
