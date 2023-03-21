@@ -13,4 +13,14 @@ class Teacher < Person
   def to_s
     "<#{self.class}> #{@name} [ID: ##{@id} | Age: #{@age} | Subject: #{@specialization}]"
   end
+
+  def to_h
+    {
+      id: @id,
+      age: @age,
+      name: @name,
+      specialization: @specialization,
+      parent_permission: @parent_permission
+    }
+  end
 end

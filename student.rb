@@ -21,4 +21,14 @@ class Student < Person
   def to_s
     "<#{self.class}> #{name} [ID: ##{@id} | Age: #{@age} | Class: #{@classroom.label}]"
   end
+
+  def to_h
+    {
+      id: @id,
+      age: @age,
+      name: @name,
+      classroom: @classroom.label,
+      parent_permission: @parent_permission
+    }
+  end
 end
