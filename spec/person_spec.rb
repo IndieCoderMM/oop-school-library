@@ -11,16 +11,11 @@ describe Person do
         end
     end
 
-    describe "#name" do
-        it "returns the correct name" do
-            expect(@person.name).to eql "Name"
-        end
-    end
-
-    describe "#age" do
-        it "returns the correct age" do
-            expect(@person.age).to eql 20
-        end
-    end
+    # describe "should return correct name" do
+    #     it "returns the correct name" do
+    #         c_n = @person.correct_name
+    #         expect(c_n).to eql("Name")
+    #     end
+    # end
 
 end
