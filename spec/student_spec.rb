@@ -29,4 +29,11 @@ describe Student do
       expect(@student.classroom.label).to eql 'English'
     end
   end
+
+  describe '#classroom=' do
+    it 'should be in different classroom' do
+      @student.classroom = Classroom.new('Maths')
+      expect(@student.classroom.label).to eql 'Maths'
+    end
+  end
 end

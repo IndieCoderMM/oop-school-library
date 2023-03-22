@@ -28,4 +28,10 @@ describe Teacher do
       expect(@teacher.specialization).to eql 'History'
     end
   end
+
+  describe '#can_use_sevices?' do
+    it 'should return true' do
+      expect(@teacher.can_use_services?).to be true
+    end
+  end
 end

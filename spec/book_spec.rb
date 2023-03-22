@@ -19,4 +19,24 @@ describe Book do
       expect(@book.author).to eql 'Author'
     end
   end
+  describe '#add_rental' do
+    context 'before adding rental' do
+      it 'should have no rental initially' do
+        expect(@book.rentals.length).to eql 0
+      end
+    end
+
+    context 'after adding a rental' do
+      it 'should have exactly one rental' do
+        rental = Rental.new('2023-3-22', @book, Person.new(22, 'James'))
+        @book.add_rental(rental)
+        expect(@book.rentals.length).to eql 1
+      end
+      it 'should contain one Rental object' do
+        rental = Rental.new('2023-3-22', @book, Person.new(22, 'James'))
+        @book.add_rental(rental)
+        expect(@book.rentals[0]).to be_instance_of Rental
+      end
+    end
+  end
 end
