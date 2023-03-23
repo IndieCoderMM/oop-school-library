@@ -24,8 +24,24 @@ describe Person do
   end
 
   describe '#can_use_services?' do
-    it 'should return true' do
-      expect(@person.can_use_services?).to be true
+    context 'if over age' do
+      it 'should return true even if no parent permission' do
+        @person.parent_permission = false
+        expect(@person.can_use_services?).to be true
+      end
+    end
+
+    context 'if under age' do
+      it 'should return false with no parent permission' do
+        @person.age = 11
+        @person.parent_permission = false
+        expect(@person.can_use_services?).to be false
+      end
+
+      it 'should return true with parent permission' do
+        @person.age = 11
+        expect(@person.can_use_services?).to be true
+      end
     end
   end
 
