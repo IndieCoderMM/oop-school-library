@@ -9,7 +9,7 @@ class Book
   end
 
   def add_rental(rental)
-    @rentals.push(rental)
+    @rentals.push(rental) unless @rentals.include?(rental)
   end
 
   def title
